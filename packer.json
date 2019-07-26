@@ -1,0 +1,44 @@
+{
+    "builders": [
+        {
+            "CPUs": 4,
+            "RAM": 4096,
+            "disk_size": 102400,
+            "network_card": "vmxnet3",
+            "type": "vsphere-iso",
+            "RAM_reserve_all": true,
+            "http_directory": "ks",
+	        "http_port_min": 8080,
+	        "http_port_max": 8080,
+            "convert_to_template": false,
+            "insecure_connection": true,
+            "disk_controller_type": "pvscsi",
+            "disk_thin_provisioned": true,
+	        "vm_version": 13,
+            "folder": "Team Hyperion",
+            "vcenter_server": "labvcn.payvision.local",
+            "host": "madesx002.payvision.local",
+            "username": "ebarragan@payvision.local",
+            "password": "{{ user `vsphere_password` }}",
+            "ssh_username": "root",
+            "ssh_password": "toor",
+            "network": "{{ user `network` }}",
+            "vm_name": "PruebaEsteban",
+            "datacenter": "Madrid Lab",
+            "datastore": "PoolA_LUN0003",
+            "cluster": "madlab",
+            "guest_os_type": "otherGuest",
+            "iso_paths": [
+                "[PoolA_LUN0000] ISO/Linux/rhel-server-7.6-x86_64-dvd.iso}"
+            ],
+            "boot_wait": "1s",
+            "boot_command": [
+                "<esc>",
+                "<wait>linux inst.ks=http://10.70.0.40:{{ .HTTPPort }}/ks.cfg<enter>"
+            ]
+        }
+    ],
+    "post-processors": [],
+    "variables": {
+    }
+}
